@@ -13,8 +13,17 @@ def partinputs(string):
 # main function
 def main():
 	#create an empty dateframe with the variables of your record:
-	df = pd.DataFrame(columns=['Currency','Action','Type','Company','Quantity','Amount'])
-	choice = input("Which account are you trading today?\n")
+	selection = ""
+	selection = input("Type read to read an existing record, otherwise type enter\n")
+	if selection.lower() == 'read':
+		name = input("Please input the file you want to read\n")
+		choice = name
+		name = '{}-trade-record.csv'.format(choice)
+		df = pd.read_csv(name,index_col=0)
+		print(df)
+	else:
+		df = pd.DataFrame(columns=['Currency','Action','Type','Company','Quantity','Amount'])
+		choice = input("Which account are you trading today?\n")
 	promote = ''
 	while promote.upper() != 'Q':
 		promote = input("Please enter your trade record as follows 'Currency Action Type Company Quantity Amount', if you want to quit press q:\n")
